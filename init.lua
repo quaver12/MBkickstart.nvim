@@ -83,7 +83,9 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
-
+-- disable netrw at the very start of your init.lua for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -250,6 +252,13 @@ require('lazy').setup({
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
   'rebelot/kanagawa.nvim',
   'ellisonleao/gruvbox.nvim',
+  {
+    'nvim-tree/nvim-tree.lua',
+    dependencies = { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    config = function()
+      require('nvim-tree').setup()
+    end,
+  },
 
   --
   -- NOTE: Plugins can also be added by using a table,
@@ -284,7 +293,6 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
-    --  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true, opts = ... },
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -353,6 +361,13 @@ require('lazy').setup({
       },
     },
   },
+
+  -- nvim tree for file explorer
+  -- optionally enable 24-bit colour
+  -- vim.opt.termguicolors = true
+
+  -- empty setup using defaults
+  -- require("nvim-tree").setup()
 
   -- NOTE: Plugins can specify dependencies.
   --
